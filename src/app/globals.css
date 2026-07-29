@@ -1,0 +1,382 @@
+/* Fonts are loaded via <link> in layout.tsx to avoid Tailwind v4 @import ordering errors */
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────────── */
+:root {
+  --crimson: #DC2626;
+  --crimson-glow: rgba(220, 38, 38, 0.45);
+  --crimson-subtle: rgba(220, 38, 38, 0.08);
+  --crimson-mid: rgba(220, 38, 38, 0.2);
+  --void: #000000;
+  --void-deep: #030303;
+  --void-mid: #0a0a0a;
+  --white: #ffffff;
+  --white-dim: rgba(255, 255, 255, 0.55);
+  --white-subtle: rgba(255, 255, 255, 0.06);
+  --white-faint: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Global Reset ──────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide default cursor globally — replaced by custom cursor */
+* {
+  cursor: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000;
+  overflow-x: hidden;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Custom Scrollbar ──────────────────────────────── */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--crimson);
+  border-radius: 2px;
+}
+
+/* ── Selection ─────────────────────────────────────── */
+::selection {
+  background: var(--crimson);
+  color: #000;
+}
+
+/* ── Typography Utilities ──────────────────────────── */
+.font-display {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Animated Grid Background ──────────────────────── */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(220, 38, 38, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220, 38, 38, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: gridPulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes gridPulse {
+  0% {
+    opacity: 0.3;
+    background-size: 64px 64px;
+  }
+
+  100% {
+    opacity: 0.7;
+    background-size: 66px 66px;
+  }
+}
+
+/* ── Film-grain Noise Overlay ──────────────────────── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  animation: noiseShift 0.4s steps(3) infinite;
+}
+
+@keyframes noiseShift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  33% {
+    transform: translate(-3px, 2px);
+  }
+
+  66% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(-1px, 1px);
+  }
+}
+
+/* ── Vignette ──────────────────────────────────────── */
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+/* ── Page Container ───────────────────────────────ai── */
+.page-container {
+  width: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+  padding-inline: 80px;
+}
+
+/* ── Section z-index ───────────────────────────────── */
+section {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Scanlines (portrait overlay) ─────────────────── */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 3px,
+      rgba(0, 0, 0, 0.12) 3px,
+      rgba(0, 0, 0, 0.12) 4px);
+  border-radius: inherit;
+  z-index: 3;
+}
+
+/* ── Glitch Keyframes ──────────────────────────────── */
+@keyframes glitch {
+  0% {
+    clip-path: inset(40% 0 60% 0);
+    transform: translate(-3px, 0);
+  }
+
+  20% {
+    clip-path: inset(92% 0 1% 0);
+    transform: translate(3px, 0);
+  }
+
+  40% {
+    clip-path: inset(43% 0 1% 0);
+    transform: translate(-2px, 0);
+  }
+
+  60% {
+    clip-path: inset(25% 0 58% 0);
+    transform: translate(2px, 0);
+  }
+
+  80% {
+    clip-path: inset(54% 0 7% 0);
+    transform: translate(-3px, 0);
+  }
+
+  100% {
+    clip-path: inset(58% 0 43% 0);
+    transform: translate(0, 0);
+  }
+}
+
+/* ── Pulse Rings ───────────────────────────────────── */
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s infinite;
+}
+
+.pulse-ring-2 {
+  animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) 0.7s infinite;
+}
+
+.pulse-ring-3 {
+  animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) 1.4s infinite;
+}
+
+/* ── Red Glow Pulse ────────────────────────────────── */
+@keyframes redGlowPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--crimson-glow), 0 0 60px rgba(220, 38, 38, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 45px var(--crimson-glow), 0 0 120px rgba(220, 38, 38, 0.25);
+  }
+}
+
+/* ── Available Dot Pulse ───────────────────────────── */
+@keyframes availablePulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+.available-dot {
+  animation: availablePulse 1.8s ease-in-out infinite;
+}
+
+/* ── Slow Rotate Animation ─────────────────────────── */
+@keyframes slowRotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+.slow-rotate {
+  animation: slowRotate 12s linear infinite;
+}
+
+/* ── Laser Scan Keyframe ───────────────────────────── */
+@keyframes laserScan {
+  0% {
+    top: -4px;
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: calc(100% + 4px);
+    opacity: 0;
+  }
+}
+
+/* ── Video Card 3D ─────────────────────────────────── */
+.video-card {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+/* ── Responsive: hide custom cursor on touch ───────── */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
+/* ── Smooth transitions ────────────────────────────── */
+.transition-smooth {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Red border glow ───────────────────────────────── */
+.border-glow {
+  box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.3),
+    0 0 20px rgba(220, 38, 38, 0.1);
+}
+
+.border-glow-hover:hover {
+  box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.7),
+    0 0 40px rgba(220, 38, 38, 0.3),
+    inset 0 0 20px rgba(220, 38, 38, 0.05);
+}
+
+/* ── Magnetic button hover ─────────────────────────── */
+.btn-crimson {
+  background: var(--crimson);
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.1em;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.btn-crimson:hover {
+  background: #ef4444;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.5),
+    0 12px 40px rgba(220, 38, 38, 0.4),
+    0 4px 16px rgba(220, 38, 38, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ── Text gradient ─────────────────────────────────── */
+.text-gradient-red {
+  background: linear-gradient(135deg, #DC2626 0%, #ff6b6b 50%, #DC2626 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Animated underline ────────────────────────────── */
+.animated-underline {
+  position: relative;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--crimson);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animated-underline:hover::after {
+  width: 100%;
+}
+
+/* ── Nav Glass ─────────────────────────────────────── */
+.nav-glass {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.08);
+}
