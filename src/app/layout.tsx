@@ -29,11 +29,7 @@ export const metadata: Metadata = {
     title: "Prathamesh Sutar — Cinematographer & Video Editor",
     description: "Visual storytelling through light, motion, and precision.",
     type: "website",
-<<<<<<< HEAD
     url: "https://prathamesh-editor-portfolio.vercel.app/", // ← UPDATE YOUR URL
-=======
-    url: "https://prathamesh-editor-portfolio.vercel.app", // ← UPDATE YOUR URL
->>>>>>> 5fcc421ffdedd63f7d5d4b302dcc19b34b9eaaf8
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }], // ← UPDATE OG IMAGE
   },
   twitter: {
