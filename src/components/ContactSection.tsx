@@ -20,7 +20,7 @@ const SOCIAL_LINKS = [
   },
   {
     label: "VIMEO",
-    href: "https://vimeo.com/yourprofile", // UPDATE
+    href: "https://vimeo.com/user261245102", // UPDATE
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
         <path d="M22 7.42c-.09 2.01-1.49 4.76-4.2 8.25C15.04 19.33 12.6 21 10.55 21c-1.31 0-2.42-1.21-3.32-3.64l-1.82-6.68C4.72 8.25 4.08 7 3.42 7c-.14 0-.64.3-1.49.9L.8 6.6c.94-.82 1.86-1.64 2.77-2.47C4.87 3.04 6.1 2.5 6.85 2.43c1.73-.17 2.79.01 3.2 3.8.43 4.07.73 6.6.9 7.59.5 2.26 1.05 3.39 1.64 3.39.46 0 1.16-.73 2.09-2.2.93-1.46 1.42-2.58 1.48-3.34.13-1.27-.37-1.9-1.48-1.9-.53 0-1.07.12-1.63.35 1.08-3.55 3.14-5.28 6.17-5.18 2.25.07 3.31 1.53 3.18 4.48z" />
@@ -231,8 +231,8 @@ export default function ContactSection() {
               }}
               transition={{ duration: 0.3 }}
               onClick={() => {
-                // UPDATE: Replace with your email or form action
-                window.location.href = "mailto:prathameshsutar068@gmail.com";
+                const message = encodeURIComponent("Hi Prathamesh, I would like to inquire about a project!");
+                window.open(`https://wa.me/919370657289?text=${message}`, "_blank");
               }}
             >
               {/* Shimmer */}

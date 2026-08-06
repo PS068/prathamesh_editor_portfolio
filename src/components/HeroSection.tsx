@@ -202,7 +202,7 @@ export default function HeroSection() {
 
       {/* ── Corner labels ────────────────────────────── */}
       <motion.div
-        className="absolute top-8 left-8 font-mono text-[10px] tracking-[0.25em] text-white/30 hidden md:block"
+        className="absolute top-16 left-8 font-mono text-[10px] tracking-[0.25em] text-white/30 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}
@@ -211,7 +211,7 @@ export default function HeroSection() {
         PORTFOLIO — 2026
       </motion.div>
       <motion.div
-        className="absolute top-8 right-8 font-mono text-[10px] tracking-[0.25em] text-white/30 hidden md:block"
+        className="absolute top-16 right-8 font-mono text-[10px] tracking-[0.25em] text-white/30 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}

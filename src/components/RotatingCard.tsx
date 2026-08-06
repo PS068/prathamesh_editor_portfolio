@@ -40,7 +40,11 @@ export default function RotatingCard() {
   };
 
   const handleCardClick = () => {
-    setShowContact(true);
+    if (!isHovered) {
+      setIsHovered(true);
+    } else {
+      setShowContact(true);
+    }
   };
 
   const handleWhatsApp = () => {
@@ -133,6 +137,9 @@ export default function RotatingCard() {
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={handleMouseLeave}
+          onTouchStart={() => {
+            if (!isHovered) setIsHovered(true);
+          }}
           onClick={handleCardClick}
           style={{
             rotateX: isHovered ? rotateX : 0,
@@ -153,10 +160,10 @@ export default function RotatingCard() {
               transition: "box-shadow 0.4s ease",
             }}
           >
-            {/* Image — revealed on hover */}
+            {/* Image — visible on all devices, fully illuminated on hover/touch */}
             <motion.div
               className="absolute inset-0"
-              animate={{ opacity: isHovered ? 1 : 0.08 }}
+              animate={{ opacity: isHovered ? 1 : 0.55 }}
               transition={{ duration: 0.5, ease: "easeOut" as const }}
             >
               <Image src="/card-photo.jpg" alt="Portrait" fill className="object-cover object-center" priority />
@@ -164,8 +171,8 @@ export default function RotatingCard() {
                 className="absolute inset-0"
                 animate={{
                   background: isHovered
-                    ? "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%)"
-                    : "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.95) 100%)",
+                    ? "linear-gradient(180deg, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.8) 100%)"
+                    : "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.85) 100%)",
                 }}
                 transition={{ duration: 0.5 }}
               />

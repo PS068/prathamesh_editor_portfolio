@@ -166,6 +166,29 @@ function Navigation() {
             ))}
           </div>
 
+          {/* ── Mobile nav links ───────────────── */}
+          <div className="flex md:hidden items-center gap-2 z-20 overflow-x-auto px-2">
+            <div className="flex flex-1 items-center justify-center gap-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="min-w-[4.5rem] whitespace-nowrap px-3 py-2 text-[9px] tracking-[0.2em] text-white/80 transition-colors duration-200 hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="min-w-[5rem] whitespace-nowrap rounded-full bg-[#DC2626]/90 px-3 py-2 text-center text-[9px] tracking-[0.2em] text-white transition-colors duration-200 hover:bg-[#f14c4c]"
+            >
+              HIRE ME
+            </a>
+          </div>
+
           {/* ── Hire Me — inner pill button ──── */}
           <motion.a
             href="#contact"
